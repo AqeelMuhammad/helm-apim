@@ -73,7 +73,7 @@ Each pattern directory contains:
    - Include necessary JDBC drivers and customizations in your Docker images
 
 3. **Configuration**:
-   - Configure ingress controller
+   - Configure routing
    - Set up databases
    - Configure keystores and truststores
    - Configure the mandatory symmetric internal encryption key (`wso2.apim.configurations.encryption.key`) used by API Manager for internal encryption and decryption of shared data; use the same key across all nodes in HA or distributed deployments
