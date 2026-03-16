@@ -21,12 +21,9 @@ For advanced details on the deployment pattern, please refer to the official
     - [1. General Configuration of Helm Charts](#1-general-configuration-of-helm-charts)
       - [1.1 Add Gateway API Controller or Ingress Controller](#11-add-gateway-api-controller-or-ingress-controller)
       - [1.2 Mount Keystore and Truststore](#12-mount-keystore-and-truststore)
-      - [1.3 Encrypting Secrets](#13-encrypting-secrets)
-      - [1.4 Configure Docker Image and Databases](#14-configure-docker-image-and-databases)
-      - [1.5 Configure SSL in Service Exposure](#15-configure-ssl-in-service-exposure)
       - [1.3 Configure Internal Encryption Key (Mandatory)](#13-configure-internal-encryption-key-mandatory)
       - [1.4 Encrypting Secrets (Cipher Tool and Secure Vault)](#14-encrypting-secrets-cipher-tool-and-secure-vault)
-      - [1.5 Configure Docker image and Databases](#15-configure-docker-image-and-databases)
+      - [1.5 Configure Docker Image and Databases](#15-configure-docker-image-and-databases)
       - [1.6 Configure SSL in Service Exposure](#16-configure-ssl-in-service-exposure)
     - [2. API Control Plane Configurations](#2-api-control-plane-configurations)
       - [2.1 Configure Multiple Gateways](#21-configure-multiple-gateways)
@@ -369,11 +366,6 @@ In addition to the primary, internal keystores and truststore files, you can als
 > For advanced details with regards to managing custom Java keystores and truststores in a container-based WSO2 product deployment
   please refer to the [official WSO2 container guide](https://github.com/wso2/container-guide/blob/master/deploy/Managing_Keystores_And_Truststores.md).
 
-#### 1.3 Encrypting Secrets
-
-- If you need to use cipher tool to encrypt the passwords in the secret, first you need to encrypt the passwords using the cipher tool. The cipher tool can be found in the bin directory of the product pack. The following command can be used to encrypt the password.
-  ```
-  sh cipher-tool.sh -Dconfigure
 #### 1.3 Configure Internal Encryption Key (Mandatory)
 
 This section is for the internal encryption key (`wso2.apim.configurations.encryption.key`), which is mandatory and used by API Manager to encrypt and decrypt internal/shared data.
@@ -425,10 +417,7 @@ This section is for the internal encryption key (`wso2.apim.configurations.encry
 > **Note**
 > These are two different keys serving distinct purposes. The internal encryption key (`wso2.apim.configurations.encryption.key`) defined in section 1.3 is **mandatory** and is used by API Manager for internal encryption of data such as registry resources and shared configuration. The secret encryption key (`secretEncryptionKey` under AWS/Azure/GCP) is a separate key used **only** when secure vault is enabled, allowing the runtime to fetch and decrypt secrets stored in a cloud provider's secret manager (which may itself include an encrypted copy of the internal encryption key).
 
-
-
-#### 1.4 Configure Docker Image and Databases
-#### 1.5 Configure Docker image and Databases
+#### 1.5 Configure Docker Image and Databases
 
   - Add the following configurations to reflect the docker image created previously in the helm chart.
     
