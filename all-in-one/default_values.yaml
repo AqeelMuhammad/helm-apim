@@ -160,7 +160,7 @@ kubernetes:
       # -- Ingress ratelimit burst limit
       burstLimit: ""
     management:
-      enabled: false
+      enabled: true
       # Hostname for API Manager Carbon Management Console, Publisher, DevPortal and Admin Portal
       hostname: "am.wso2.com"
       # Annotations for the API Manager Publisher-DevPortal services Ingress
@@ -170,7 +170,7 @@ kubernetes:
         nginx.ingress.kubernetes.io/session-cookie-name: "route"
         nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
     gateway:
-      enabled: false
+      enabled: true
       # -- Ingress hostname for Gateway pass-through
       hostname: "gw.wso2.com"
       # -- Ingress annotations for Gateway pass-through
@@ -179,14 +179,14 @@ kubernetes:
         nginx.ingress.kubernetes.io/proxy-buffering: "on"
         nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
     websocket:
-      enabled: false
+      enabled: true
       # -- Ingress hostname for Websocket
       hostname: "websocket.wso2.com"
       # -- Ingress annotations for Websocket
       annotations:
         #todo: add websocket specific annotations
     websub:
-      enabled: false
+      enabled: true
       # -- Ingress hostname for Websub
       hostname: "websub.wso2.com"
       # -- Ingress annotations for Websub
@@ -274,6 +274,13 @@ kubernetes:
   configMaps:
     scripts:
       defaultMode: "0407"
+  secureVaultSecret:
+    # -- Mount a local Kubernetes secret for secure-vault testing when cloud providers are not used.
+    enabled: false
+    secretName: ""
+    mountPath: "/mnt/local-secrets"
+    symmetricKeyKey: "masterEncryptionKey"
+    internalKeystorePasswordKey: "internalKeystorePassword"
 
 
 wso2:  
@@ -747,10 +754,10 @@ wso2:
         password: ""
       # -- Registry containing the image
       registry: "docker.io"
-      # -- Repository name consisting the image
-      repository: "wso2/wso2am:4.7.0"
+      # -- Azure ACR repository name consisting the image
+      repository: "aqeeltm/wso2am:4.7.0-SNAPSHOT"
       # -- Docker image digest
-      digest: "sha256:e2dc61ede174a49b6c99527bb7d1e188133dc72776850161e0118380ad0d1fe4"
+      digest: "sha256:4007ac8d30ddd9a29a59fdfc79d8a248d61b67707b1aa83179db722bee6997c1"
       # -- Refer to the Kubernetes documentation on updating images (https://kubernetes.io/docs/concepts/containers/images/#updating-images)
       imagePullPolicy: Always
 

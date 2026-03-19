@@ -1,0 +1,13 @@
+kubernetes:
+  secureVaultSecret:
+    enabled: true
+    secretName: apim-local-secure-vault
+
+wso2:
+  apim:
+    secureVaultEnabled: true
+    configurations:
+      encryption:
+        key: "9040afa51898b4271f42dc3cc64850381c09d41861b91c54c68e79750d83cddf"
+        cipherTransformation: "AES/GCM/NoPadding"
+        internalCryptoProvider: "org.wso2.carbon.crypto.provider.SymmetricKeyInternalCryptoProvider"

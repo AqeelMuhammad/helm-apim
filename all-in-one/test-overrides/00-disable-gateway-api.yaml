@@ -1,0 +1,3 @@
+kubernetes:
+  gatewayAPI:
+    enabled: false

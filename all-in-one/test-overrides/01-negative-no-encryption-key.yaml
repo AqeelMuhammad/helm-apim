@@ -1,0 +1,8 @@
+wso2:
+  apim:
+    secureVaultEnabled: false
+    configurations:
+      encryption:
+        key: ""
+        cipherTransformation: "AES/GCM/NoPadding"
+        internalCryptoProvider: "org.wso2.carbon.crypto.provider.SymmetricKeyInternalCryptoProvider"

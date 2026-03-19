@@ -1,0 +1,13 @@
+kubernetes:
+  secureVaultSecret:
+    enabled: true
+    secretName: apim-local-secure-vault
+
+wso2:
+  apim:
+    secureVaultEnabled: true
+    configurations:
+      encryption:
+        key: ""
+        cipherTransformation: "RSA/ECB/OAEPwithSHA1andMGF1Padding"
+        internalCryptoProvider: "org.wso2.carbon.crypto.provider.KeyStoreBasedInternalCryptoProvider"

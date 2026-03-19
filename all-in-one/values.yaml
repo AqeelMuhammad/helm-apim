@@ -329,6 +329,13 @@ kubernetes:
   #     secret:
   #       secretName: my-k8s-secret
   extraVolumes: []
+  secureVaultSecret:
+    # -- Mount a local Kubernetes secret for secure-vault testing when cloud providers are not used.
+    enabled: false
+    secretName: ""
+    mountPath: "/mnt/local-secrets"
+    symmetricKeyKey: "masterEncryptionKey"
+    internalKeystorePasswordKey: "internalKeystorePassword"
 
 wso2:
   # -- ELK Analytics Parameters
@@ -934,4 +941,3 @@ wso2:
           carbonDatabase: 50M
           # -- For persisting the indexed solr data
           solrIndexedData: 50M
-

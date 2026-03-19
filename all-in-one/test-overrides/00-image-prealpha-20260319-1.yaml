@@ -1,0 +1,7 @@
+wso2:
+  deployment:
+    image:
+      registry: docker.io
+      repository: aqeeltm/wso2am:4.7.0-prealpha-20260319-1
+      digest: "sha256:8dd7bcabdc3143cf050f1e0f2a9f2f1b9a2cfa1dcaf0fa4cfbc66231d17dce67"
+      imagePullPolicy: Always

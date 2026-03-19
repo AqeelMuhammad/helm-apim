@@ -50,6 +50,8 @@ data:
     cp /mnt/secrets-store/{{ .Values.aws.secretsManager.secretIdentifiers.secretEncryptionKey.secretKey }} ${WSO2_SERVER_HOME}/encryption-key-tmp
     {{- else if .Values.gcp.enabled }}
     cp /mnt/secrets-store/{{ .Values.gcp.secretsManager.secretEncryptionKey.secretName }} ${WSO2_SERVER_HOME}/encryption-key-tmp
+    {{- else if .Values.kubernetes.secureVaultSecret.enabled }}
+    cp {{ .Values.kubernetes.secureVaultSecret.mountPath }}/{{ .Values.kubernetes.secureVaultSecret.symmetricKeyKey }} ${WSO2_SERVER_HOME}/encryption-key-persist
     {{- end }}
     {{- else }}
     # copy the internal keystore password to ${WSO2_SERVER_HOME}/password-tmp for keystore-based encryption
@@ -59,6 +61,8 @@ data:
     cp /mnt/secrets-store/{{ .Values.aws.secretsManager.secretIdentifiers.internalKeystorePassword.secretKey }} ${WSO2_SERVER_HOME}/password-tmp
     {{- else if .Values.gcp.enabled }}
     cp /mnt/secrets-store/{{ .Values.gcp.secretsManager.secret.secretName }} ${WSO2_SERVER_HOME}/password-tmp
+    {{- else if .Values.kubernetes.secureVaultSecret.enabled }}
+    cp {{ .Values.kubernetes.secureVaultSecret.mountPath }}/{{ .Values.kubernetes.secureVaultSecret.internalKeystorePasswordKey }} ${WSO2_SERVER_HOME}/password-tmp
     {{- end }}
     {{- end }}
     {{- end }}

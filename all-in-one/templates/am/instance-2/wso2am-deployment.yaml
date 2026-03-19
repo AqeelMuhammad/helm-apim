@@ -260,9 +260,16 @@ spec:
             - name: wso2am-secret-conf
               mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/security/secret-conf.properties
               subPath: secret-conf.properties
+            {{- if or .Values.azure.enabled .Values.aws.enabled .Values.gcp.enabled }}
             - name: wso2am-secret-store-csi
               mountPath: /mnt/secrets-store
               readOnly: true
+            {{- end }}
+            {{- if .Values.kubernetes.secureVaultSecret.enabled }}
+            - name: wso2am-local-secure-vault-secret
+              mountPath: {{ .Values.kubernetes.secureVaultSecret.mountPath }}
+              readOnly: true
+            {{- end }}
             {{- end }}
             {{- if .Values.kubernetes.extraVolumeMounts }}{{ toYaml .Values.kubernetes.extraVolumeMounts | nindent 12 }}{{- end }}
             {{- if .Values.wso2.apim.configurations.security.jksSecretName }}
@@ -333,6 +340,7 @@ spec:
           configMap:
             name: {{ template "am-all-in-one.fullname" . }}-conf-secret-conf
             defaultMode: 0407
+        {{- if or .Values.azure.enabled .Values.aws.enabled .Values.gcp.enabled }}
         - name: wso2am-secret-store-csi
           csi:
             driver: secrets-store.csi.k8s.io
@@ -349,6 +357,12 @@ spec:
             volumeAttributes:
               secretProviderClass: {{ .Values.gcp.secretsManager.secretProviderClass }}
             {{- end }}
+        {{- end }}
+        {{- if .Values.kubernetes.secureVaultSecret.enabled }}
+        - name: wso2am-local-secure-vault-secret
+          secret:
+            secretName: {{ .Values.kubernetes.secureVaultSecret.secretName }}
+        {{- end }}
         {{- end }}
         {{- if .Values.kubernetes.extraVolumes }}{{ toYaml .Values.kubernetes.extraVolumes | nindent 8 }}{{- end }}
         {{- if .Values.wso2.apim.configurations.security.jksSecretName }}
